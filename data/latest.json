@@ -1,0 +1,16 @@
+{
+  "updated_date": "placeholder",
+  "regime": "Green",
+  "regime_text": "Credit/liquidity supportive",
+  "correction_risk": "Low",
+  "action_bias": "Trend allowed",
+  "total_score": 0,
+  "state": "Normal",
+  "state_class": "green",
+  "component_table": [],
+  "history": {
+    "dates": [],
+    "nq": [],
+    "score": []
+  }
+}

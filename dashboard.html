@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ES/NQ Overextension Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d1117;
+      --panel:#161b22;
+      --line:#2d333b;
+      --text:#e6edf3;
+      --muted:#9ba7b4;
+      --green:#2ecc71;
+      --amber:#f4b942;
+      --red:#ff6b6b;
+      --blue:#58a6ff
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Inter,sans-serif
+    }
+    .wrap{
+      max-width:1280px;
+      margin:0 auto;
+      padding:24px
+    }
+    .hero{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:flex-start;
+      margin-bottom:20px
+    }
+    .title{
+      font-size:32px;
+      font-weight:800
+    }
+    .sub{
+      color:var(--muted);
+      max-width:880px;
+      margin-top:8px;
+      line-height:1.5
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:16px
+    }
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:18px
+    }
+    .panel h2{
+      margin:0 0 14px;
+      font-size:18px
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px
+    }
+    .kpi{
+      background:#0f141b;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:14px
+    }
+    .label{
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px
+    }
+    .value{
+      font-size:28px;
+      font-weight:800
+    }
+    .small{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px
+    }
+    .scorebar{
+      height:14px;
+      border-radius:999px;
+      background:#0f141b;
+      border:1px solid var(--line);
+      overflow:hidden;
+      margin-top:14px
+    }
+    .fill{
+      height:100%;
+      width:0;
+      background:linear-gradient(90deg,var(--green),var(--amber),var(--red))
+    }
+    .pill{
+      display:inline-block;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700
+    }
+    .green{
+      background:rgba(46,204,113,.14);
+      color:var(--green)
+    }
+    .amber{
+      background:rgba(244,185,66,.14);
+      color:var(--amber)
+    }
+    .red{
+      background:rgba(255,107,107,.14);
+      color:var(--red)
+    }
+    table{
+      width:100%;
+      border-collapse:collapse
+    }
+    th,td{
+      text-align:left;
+      padding:10px 8px;
+      border-bottom:1px solid var(--line);
+      font-size:14px
+    }
+    th{
+      color:var(--muted)
+    }
+    .muted{
+      color:var(--muted)
+    }
+    .mono{
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+      font-size:13px
+    }
+    @media(max-width:1100px){
+      .grid{grid-template-columns:1fr}
+      .kpis{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="title">ES/NQ Overextension Dashboard</div>
+      <div class="sub">
+        Free-stack daily dashboard using regime proxies from HYG/IEF, VIX/VXN, and USDJPY, plus a Tyler-style overextension model built from QQQ/SPY, SMH leadership, realized volatility, and extension metrics.
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="panel">
+      <h2>Current state</h2>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="label">Overextension score</div>
+          <div id="score" class="value">--</div>
+          <div id="state" class="small">Loading...</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Regime</div>
+          <div id="regime" class="value">--</div>
+          <div id="regimeText" class="small">Loading...</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Correction risk</div>
+          <div id="risk" class="value">--</div>
+          <div id="riskText" class="small">Loading...</div>
+        </div>
+        <div class="kpi">
+          <div class="label">Updated</div>
+          <div id="updated" class="value" style="font-size:20px">--</div>
+          <div class="small">Daily refresh</div>
+        </div>
+      </div>
+      <div class="scorebar"><div id="fill" class="fill"></div></div>
+      <div id="chart" style="height:380px;margin-top:18px"></div>
+    </div>
+    <div class="panel">
+      <h2>Components</h2>
+      <table>
+        <thead><tr><th>Component</th><th>Value</th><th>Status</th></tr></thead>
+        <tbody id="components"></tbody>
+      </table>
+      <h2 style="margin-top:18px">Rules</h2>
+      <div class="muted" style="line-height:1.55">
+        Regime = HYG/IEF + VIX/VXN + USDJPY. Overextension = dispersion + extension + vol + leadership concentration. States: Normal &lt; 4, Stretched 4-5.99, Overextended 6-7.49, Very overextended 7.5+.
+      </div>
+      <h2 style="margin-top:18px">Telegram</h2>
+      <div class="muted">
+        Daily summary and threshold alerts are sent by the GitHub Actions workflow when configured with your bot token and chat ID.
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+async function load(){
+  const res = await fetch('./data/latest.json?ts=' + Date.now());
+  const j = await res.json();
+  document.getElementById('score').textContent = j.total_score.toFixed(1);
+  document.getElementById('state').innerHTML = `<span class="pill ${j.state_class}">${j.state}</span>`;
+  document.getElementById('regime').textContent = j.regime;
+  document.getElementById('regimeText').textContent = j.regime_text;
+  document.getElementById('risk').textContent = j.correction_risk;
+  document.getElementById('riskText').textContent = j.action_bias;
+  document.getElementById('updated').textContent = j.updated_date;
+  document.getElementById('fill').style.width = Math.min(100, j.total_score / 8 * 100) + '%';
+  document.getElementById('components').innerHTML = j.component_table
+    .map(r => `<tr><td>${r.name}</td><td class="mono">${r.value}</td><td><span class="pill ${r.class}">${r.status}</span></td></tr>`)
+    .join('');
+  Plotly.newPlot('chart', [
+    {
+      x:j.history.dates,
+      y:j.history.nq,
+      type:'scatter',
+      mode:'lines',
+      name:'QQQ proxy',
+      line:{color:'#58a6ff', width:2}
+    },
+    {
+      x:j.history.dates,
+      y:j.history.score,
+      type:'scatter',
+      mode:'lines+markers',
+      name:'Score',
+      yaxis:'y2',
+      line:{color:'#ff6b6b', width:2}
+    }
+  ], {
+    paper_bgcolor:'rgba(0,0,0,0)',
+    plot_bgcolor:'rgba(0,0,0,0)',
+    font:{color:'#c9d1d9'},
+    legend:{orientation:'h'},
+    margin:{l:40,r:40,t:10,b:40},
+    xaxis:{gridcolor:'#2d333b'},
+    yaxis:{title:'QQQ', gridcolor:'#2d333b'},
+    yaxis2:{title:'Score', overlaying:'y', side:'right', range:[0,8.5]}
+  }, {displayModeBar:false, responsive:true});
+}
+load();
+</script>
+</body>
+</html>
