@@ -403,5 +403,6 @@
       5.0,
       4.0
     ]
-  }
+  },
+  "note": "Insufficient market data returned by Yahoo Finance"
 }
