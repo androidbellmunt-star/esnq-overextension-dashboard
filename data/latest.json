@@ -1,5 +1,5 @@
 {
-  "updated_date": "2026-05-28",
+  "updated_date": "2026-05-30",
   "regime": "Amber",
   "regime_text": "Watch stress building",
   "correction_risk": "Moderate",
@@ -10,38 +10,37 @@
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "1 | nq-spread=0.014",
+      "value": "1 | nq-spread=0.015",
       "status": "Hot",
       "class": "amber"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=1.412%",
+      "value": "0 | qqq=1.106%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "2 | VXN-VIX=7.24",
+      "value": "2 | VXN-VIX=7.26",
       "status": "Rising",
       "class": "red"
     },
     {
       "name": "Leadership",
-      "value": "1 | smh-lead=0.052",
+      "value": "1 | smh-lead=0.036",
       "status": "Narrow",
       "class": "amber"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=0.8487 | USDJPY=159.18",
+      "value": "HYG/IEF=0.8485 | USDJPY=159.27",
       "status": "Amber",
       "class": "amber"
     }
   ],
   "history": {
     "dates": [
-      "2025-12-05",
       "2025-12-08",
       "2025-12-09",
       "2025-12-10",
@@ -159,10 +158,10 @@
       "2026-05-22",
       "2026-05-26",
       "2026-05-27",
-      "2026-05-28"
+      "2026-05-28",
+      "2026-05-29"
     ],
     "nq": [
-      623.89,
       622.69,
       623.46,
       626.01,
@@ -280,14 +279,14 @@
       717.54,
       730.28,
       729.45,
-      735.75
+      735.6,
+      738.31
     ],
     "score": [
       4.0,
       3.0,
-      2.0,
       1.0,
-      0.0,
+      1.0,
       2.0,
       2.0,
       2.0,
@@ -401,8 +400,8 @@
       2.0,
       6.0,
       5.0,
+      4.0,
       4.0
     ]
-  },
-  "note": "Insufficient market data returned by Yahoo Finance"
+  }
 }
