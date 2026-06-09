@@ -1,52 +1,46 @@
 {
-  "updated_date": "2026-05-30",
-  "regime": "Amber",
-  "regime_text": "Watch stress building",
-  "correction_risk": "Moderate",
-  "action_bias": "Selective",
-  "total_score": 4.0,
-  "state": "Stretched",
-  "state_class": "amber",
+  "updated_date": "2026-06-09",
+  "regime": "Red",
+  "regime_text": "Backdrop can amplify downside",
+  "correction_risk": "Low",
+  "action_bias": "Trend allowed",
+  "total_score": 2.0,
+  "state": "Normal",
+  "state_class": "green",
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "1 | nq-spread=0.015",
-      "status": "Hot",
-      "class": "amber"
+      "value": "0 | nq-spread=-0.010",
+      "status": "Calm",
+      "class": "green"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=1.106%",
+      "value": "0 | qqq=-1.965%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "2 | VXN-VIX=7.26",
+      "value": "2 | VXN-VIX=8.20",
       "status": "Rising",
       "class": "red"
     },
     {
       "name": "Leadership",
-      "value": "1 | smh-lead=0.036",
-      "status": "Narrow",
-      "class": "amber"
+      "value": "0 | smh-lead=0.010",
+      "status": "Broad",
+      "class": "green"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=0.8485 | USDJPY=159.27",
-      "status": "Amber",
-      "class": "amber"
+      "value": "HYG/IEF=0.8505 | USDJPY=160.33",
+      "status": "Red",
+      "class": "green"
     }
   ],
   "history": {
     "dates": [
-      "2025-12-08",
-      "2025-12-09",
-      "2025-12-10",
-      "2025-12-11",
-      "2025-12-12",
-      "2025-12-15",
       "2025-12-16",
       "2025-12-17",
       "2025-12-18",
@@ -159,15 +153,15 @@
       "2026-05-26",
       "2026-05-27",
       "2026-05-28",
-      "2026-05-29"
+      "2026-05-29",
+      "2026-06-01",
+      "2026-06-02",
+      "2026-06-03",
+      "2026-06-04",
+      "2026-06-05",
+      "2026-06-08"
     ],
     "nq": [
-      622.69,
-      623.46,
-      626.01,
-      623.99,
-      612.06,
-      608.99,
       610.19,
       598.88,
       607.56,
@@ -280,15 +274,15 @@
       730.28,
       729.45,
       735.6,
-      738.31
+      738.31,
+      742.74,
+      746.16,
+      744.21,
+      740.61,
+      705.06,
+      716.07
     ],
     "score": [
-      4.0,
-      3.0,
-      1.0,
-      1.0,
-      2.0,
-      2.0,
       2.0,
       2.0,
       2.0,
@@ -401,8 +395,13 @@
       6.0,
       5.0,
       4.0,
-      4.0
+      4.0,
+      4.0,
+      4.0,
+      5.0,
+      4.0,
+      2.0,
+      2.0
     ]
-  },
-  "note": "Insufficient market data returned by Yahoo Finance"
+  }
 }
