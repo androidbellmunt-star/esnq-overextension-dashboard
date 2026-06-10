@@ -1,4 +1,4 @@
-import json, math, os
+import json, math, os, time
 from datetime import datetime
 import requests
 import pandas as pd
@@ -21,15 +21,37 @@ TICKERS = {
 }
 
 def fetch_prices():
-    df = yf.download(
-        list(TICKERS.values()),
-        period="6mo",
-        interval="1d",
-        auto_adjust=False,
-        progress=False
-    )["Adj Close"].dropna(how="all")
-    df.columns = [k for k in TICKERS.keys()]
-    return df.dropna()
+    last_err = None
+
+    for attempt in range(5):
+        try:
+            df = yf.download(
+                list(TICKERS.values()),
+                period="6mo",
+                interval="1d",
+                auto_adjust=False,
+                progress=False,
+                threads=False
+            )["Adj Close"].dropna(how="all")
+
+            if df.empty:
+                raise ValueError("No data returned from Yahoo Finance")
+
+            df.columns = [k for k in TICKERS.keys()]
+            df = df.dropna()
+
+            if df.empty:
+                raise ValueError("Downloaded data became empty after dropna()")
+
+            return df
+
+        except Exception as e:
+            last_err = e
+            wait_seconds = 15 * (attempt + 1)
+            print(f"Download attempt {attempt + 1} failed: {e}. Retrying in {wait_seconds}s...")
+            time.sleep(wait_seconds)
+
+    raise last_err
 
 def ret(a, b):
     return a / b - 1
