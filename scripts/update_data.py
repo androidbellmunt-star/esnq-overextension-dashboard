@@ -51,7 +51,8 @@ def fetch_prices():
             print(f"Download attempt {attempt + 1} failed: {e}. Retrying in {wait_seconds}s...")
             time.sleep(wait_seconds)
 
-    raise last_err
+    print(f"All download attempts failed: {last_err}")
+    return None
 
 def ret(a, b):
     return a / b - 1
@@ -169,6 +170,16 @@ def send_telegram(msg):
 
 def main():
     df = fetch_prices()
+
+    if df is None:
+        msg = (
+            "ES/NQ dashboard update\n"
+            "Data source temporarily unavailable.\n"
+            "Yahoo Finance returned no data after multiple retries."
+        )
+        send_telegram(msg)
+        return
+
     result = run_model(df)
 
     out = os.path.join(os.path.dirname(__file__), "..", "data", "latest.json")
