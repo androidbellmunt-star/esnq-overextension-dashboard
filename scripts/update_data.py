@@ -20,89 +20,25 @@ TICKERS = {
     "USDJPY": "JPY=X"
 }
 
-
-def output_path():
-    return os.path.join(os.path.dirname(__file__), "..", "data", "latest.json")
-
-
-def load_existing():
-    path = output_path()
-    if os.path.exists(path):
-        with open(path, "r") as f:
-            return json.load(f)
-    return {
-        "updated_date": "placeholder",
-        "regime": "Green",
-        "regime_text": "Credit/liquidity supportive",
-        "correction_risk": "Low",
-        "action_bias": "Trend allowed",
-        "total_score": 0,
-        "state": "Normal",
-        "state_class": "green",
-        "component_table": [],
-        "history": {"dates": [], "nq": [], "score": []}
-    }
-
-
-def fallback_result(reason):
-    existing = load_existing()
-    existing["note"] = reason
-    return existing
-
-
 def fetch_prices():
-    try:
-        raw = yf.download(
-            list(TICKERS.values()),
-            period="6mo",
-            interval="1d",
-            auto_adjust=False,
-            progress=False,
-            threads=False
-        )
-        if raw.empty:
-            return pd.DataFrame()
-
-        if "Adj Close" in raw:
-            df = raw["Adj Close"].copy()
-        elif "Close" in raw:
-            df = raw["Close"].copy()
-        else:
-            return pd.DataFrame()
-
-        expected_cols = list(TICKERS.values())
-        if isinstance(df, pd.Series):
-            df = df.to_frame()
-
-        available = [c for c in expected_cols if c in df.columns]
-        if not available:
-            return pd.DataFrame()
-
-        df = df[available].dropna(how="all")
-
-        rename_map = {v: k for k, v in TICKERS.items()}
-        df = df.rename(columns=rename_map)
-
-        required = list(TICKERS.keys())
-        missing = [c for c in required if c not in df.columns]
-        if missing:
-            return pd.DataFrame()
-
-        return df.dropna()
-    except Exception:
-        return pd.DataFrame()
-
+    df = yf.download(
+        list(TICKERS.values()),
+        period="6mo",
+        interval="1d",
+        auto_adjust=False,
+        progress=False
+    )["Adj Close"].dropna(how="all")
+    df.columns = [k for k in TICKERS.keys()]
+    return df.dropna()
 
 def ret(a, b):
     return a / b - 1
-
 
 def realized_vol(series):
     r = (series / series.shift(1)).apply(math.log).dropna()
     if len(r) < 2:
         return 0.0
     return r.std() * math.sqrt(252) * 100
-
 
 def classify_state(score):
     if score >= 7.5:
@@ -113,13 +49,9 @@ def classify_state(score):
         return "Stretched", "amber"
     return "Normal", "green"
 
-
 def run_model(df):
-    if df.empty or len(df) < 6:
-        return fallback_result("Insufficient market data returned by Yahoo Finance")
-
     last = df.iloc[-1]
-    prev5 = df.iloc[-6]
+    prev5 = df.iloc[-6] if len(df) >= 6 else df.iloc[0]
     ma5 = df.tail(5).mean()
 
     nq_es_spread = ret(last["QQQ"], prev5["QQQ"]) - ret(last["SPY"], prev5["SPY"])
@@ -169,7 +101,7 @@ def run_model(df):
 
     hist_dates, hist_nq, hist_score = [], [], []
     for i in range(5, len(df)):
-        seg = df.iloc[:i + 1]
+        seg = df.iloc[:i+1]
         last2 = seg.iloc[-1]
         prev52 = seg.iloc[-6]
         ma52 = seg.tail(5).mean()
@@ -193,7 +125,7 @@ def run_model(df):
         {"name": "Regime", "value": f"HYG/IEF={hyg_ief:.4f} | USDJPY={usdjpy:.2f}", "status": regime, "class": state_class if regime != "Green" else "green"}
     ]
 
-    return {
+    result = {
         "updated_date": datetime.utcnow().strftime("%Y-%m-%d"),
         "regime": regime,
         "regime_text": regime_text,
@@ -205,37 +137,33 @@ def run_model(df):
         "component_table": component_table,
         "history": {"dates": hist_dates, "nq": hist_nq, "score": hist_score}
     }
-
+    return result
 
 def send_telegram(msg):
     if not BOT_TOKEN or not CHAT_ID:
         return
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-    requests.post(url, data={"chat_id": CHAT_ID, "text": msg}, timeout=15)
-
+    requests.post(url, data={"chat_id": CHAT_ID, "text": msg}, timeout=20)
 
 def main():
     df = fetch_prices()
     result = run_model(df)
 
-    out = output_path()
+    out = os.path.join(os.path.dirname(__file__), "..", "data", "latest.json")
     with open(out, "w") as f:
         json.dump(result, f, indent=2)
 
     msg = (
         f"ES/NQ dashboard update\n"
         f"Date: {result['updated_date']}\n"
-        f"Regime: {result['regime']}\n"
-        f"Score: {result['total_score']:.1f}\n"
-        f"State: {result['state']}\n"
-        f"Risk: {result['correction_risk']}"
+        f"Backdrop: {result['regime']} ({result['regime_text']})\n"
+        f"Tactical score: {result['total_score']:.1f}\n"
+        f"Tactical state: {result['state']}\n"
+        f"Composite stance: {result['action_bias']}\n"
+        f"Risk: {result['correction_risk']}\n"
+        f"Interpretation: {result['regime_text']}"
     )
-
-    if "note" in result:
-        msg += f"\nNote: {result['note']}"
-
     send_telegram(msg)
-
 
 if __name__ == "__main__":
     main()
