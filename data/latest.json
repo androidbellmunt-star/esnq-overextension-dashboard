@@ -1,48 +1,46 @@
 {
-  "updated_date": "2026-06-30",
+  "updated_date": "2026-07-01",
   "regime": "Red",
   "regime_text": "Backdrop can amplify downside",
   "correction_risk": "Low",
   "action_bias": "Trend allowed",
-  "total_score": 1.0,
+  "total_score": 0.0,
   "state": "Normal",
   "state_class": "green",
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "1 | nq-spread=-0.010",
-      "status": "Hot",
-      "class": "amber"
+      "value": "0 | nq-spread=0.004",
+      "status": "Calm",
+      "class": "green"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=0.153%",
+      "value": "0 | qqq=-0.333%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "0 | VXN-VIX=-66.72",
+      "value": "0 | VXN-VIX=-66.71",
       "status": "Contained",
       "class": "green"
     },
     {
       "name": "Leadership",
-      "value": "0 | smh-lead=-0.009",
+      "value": "0 | smh-lead=0.013",
       "status": "Broad",
       "class": "green"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=3.9965 | USDJPY=29.37",
+      "value": "HYG/IEF=4.0177 | USDJPY=27.69",
       "status": "Red",
       "class": "green"
     }
   ],
   "history": {
     "dates": [
-      "2026-01-07",
-      "2026-01-08",
       "2026-01-09",
       "2026-01-12",
       "2026-01-13",
@@ -159,11 +157,11 @@
       "2026-06-24",
       "2026-06-25",
       "2026-06-26",
-      "2026-06-29"
+      "2026-06-29",
+      "2026-06-30",
+      "2026-07-01"
     ],
     "nq": [
-      78.88,
-      78.94,
       79.0,
       79.04,
       79.04,
@@ -280,7 +278,9 @@
       79.85,
       79.88,
       79.83,
-      80.01
+      80.01,
+      79.97,
+      79.59
     ],
     "score": [
       0.0,
@@ -300,8 +300,6 @@
       0.0,
       0.0,
       0.0,
-      0.0,
-      0.0,
       1.0,
       1.0,
       0.0,
@@ -401,7 +399,9 @@
       0.0,
       0.0,
       0.0,
-      1.0
+      1.0,
+      0.0,
+      0.0
     ]
   }
 }
