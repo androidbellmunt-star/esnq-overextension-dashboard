@@ -1,5 +1,5 @@
 {
-  "updated_date": "2026-07-13",
+  "updated_date": "2026-07-20",
   "regime": "Red",
   "regime_text": "Backdrop can amplify downside",
   "correction_risk": "Low",
@@ -10,41 +10,37 @@
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "0 | nq-spread=0.005",
+      "value": "0 | nq-spread=-0.001",
       "status": "Calm",
       "class": "green"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=-0.201%",
+      "value": "0 | qqq=-0.055%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "0 | VXN-VIX=-67.43",
+      "value": "0 | VXN-VIX=-66.21",
       "status": "Contained",
       "class": "green"
     },
     {
       "name": "Leadership",
-      "value": "0 | smh-lead=0.015",
+      "value": "0 | smh-lead=0.001",
       "status": "Broad",
       "class": "green"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=4.1327 | USDJPY=27.30",
+      "value": "HYG/IEF=4.2234 | USDJPY=28.53",
       "status": "Red",
       "class": "green"
     }
   ],
   "history": {
     "dates": [
-      "2026-01-22",
-      "2026-01-23",
-      "2026-01-26",
-      "2026-01-27",
       "2026-01-28",
       "2026-01-29",
       "2026-01-30",
@@ -158,13 +154,14 @@
       "2026-07-08",
       "2026-07-09",
       "2026-07-10",
-      "2026-07-13"
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17",
+      "2026-07-20"
     ],
     "nq": [
-      78.81,
-      78.77,
-      78.81,
-      78.8,
       78.67,
       78.67,
       78.75,
@@ -278,7 +275,12 @@
       79.66,
       79.75,
       79.71,
-      79.52
+      79.52,
+      79.68,
+      79.81,
+      79.8,
+      79.65,
+      79.68
     ],
     "score": [
       0.0,
@@ -286,10 +288,6 @@
       0.0,
       0.0,
       0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
       1.0,
       1.0,
       0.0,
@@ -398,6 +396,11 @@
       1.0,
       0.0,
       0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
       0.0
     ]
   }
