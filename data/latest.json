@@ -1,49 +1,46 @@
 {
-  "updated_date": "2026-07-23",
+  "updated_date": "2026-07-28",
   "regime": "Red",
   "regime_text": "Backdrop can amplify downside",
   "correction_risk": "Low",
   "action_bias": "Trend allowed",
-  "total_score": 0.0,
+  "total_score": 1.0,
   "state": "Normal",
   "state_class": "green",
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "0 | nq-spread=0.002",
-      "status": "Calm",
-      "class": "green"
+      "value": "1 | nq-spread=-0.006",
+      "status": "Hot",
+      "class": "amber"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=-0.397%",
+      "value": "0 | qqq=0.108%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "0 | VXN-VIX=-64.51",
+      "value": "0 | VXN-VIX=-68.85",
       "status": "Contained",
       "class": "green"
     },
     {
       "name": "Leadership",
-      "value": "0 | smh-lead=0.020",
+      "value": "0 | smh-lead=0.006",
       "status": "Broad",
       "class": "green"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=4.1366 | USDJPY=28.06",
+      "value": "HYG/IEF=4.3302 | USDJPY=28.61",
       "status": "Red",
       "class": "green"
     }
   ],
   "history": {
     "dates": [
-      "2026-02-02",
-      "2026-02-03",
-      "2026-02-04",
       "2026-02-05",
       "2026-02-06",
       "2026-02-09",
@@ -159,12 +156,12 @@
       "2026-07-20",
       "2026-07-21",
       "2026-07-22",
-      "2026-07-23"
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-27",
+      "2026-07-28"
     ],
     "nq": [
-      78.8,
-      78.75,
-      78.65,
       78.57,
       78.84,
       78.95,
@@ -280,12 +277,12 @@
       79.68,
       79.65,
       79.52,
-      79.23
+      79.23,
+      79.23,
+      79.27,
+      79.42
     ],
     "score": [
-      0.0,
-      0.0,
-      1.0,
       1.0,
       0.0,
       0.0,
@@ -401,7 +398,10 @@
       0.0,
       0.0,
       0.0,
-      0.0
+      0.0,
+      0.0,
+      0.0,
+      1.0
     ]
   }
 }
