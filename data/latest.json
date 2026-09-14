@@ -1,49 +1,46 @@
 {
-  "updated_date": "2026-09-10",
+  "updated_date": "2026-09-14",
   "regime": "Red",
   "regime_text": "Backdrop can amplify downside",
   "correction_risk": "Low",
   "action_bias": "Trend allowed",
-  "total_score": 0.0,
+  "total_score": 1.0,
   "state": "Normal",
   "state_class": "green",
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "0 | nq-spread=0.005",
-      "status": "Calm",
-      "class": "green"
+      "value": "1 | nq-spread=0.006",
+      "status": "Hot",
+      "class": "amber"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=-0.504%",
+      "value": "0 | qqq=-0.305%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "0 | VXN-VIX=-65.25",
+      "value": "0 | VXN-VIX=-67.32",
       "status": "Contained",
       "class": "green"
     },
     {
       "name": "Leadership",
-      "value": "0 | smh-lead=-0.030",
+      "value": "0 | smh-lead=-0.000",
       "status": "Broad",
       "class": "green"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=4.0915 | USDJPY=23.33",
+      "value": "HYG/IEF=4.1289 | USDJPY=22.05",
       "status": "Red",
       "class": "green"
     }
   ],
   "history": {
     "dates": [
-      "2026-03-18",
-      "2026-03-19",
-      "2026-03-20",
       "2026-03-23",
       "2026-03-24",
       "2026-03-25",
@@ -162,12 +159,11 @@
       "2026-09-04",
       "2026-09-08",
       "2026-09-09",
-      "2026-09-10"
+      "2026-09-10",
+      "2026-09-11",
+      "2026-09-14"
     ],
     "nq": [
-      77.05,
-      77.3,
-      76.58,
       77.08,
       76.82,
       77.06,
@@ -286,14 +282,13 @@
       79.16,
       79.12,
       78.98,
-      78.62
+      78.62,
+      78.6,
+      78.53
     ],
     "score": [
-      1.0,
       2.0,
-      1.0,
-      1.0,
-      1.0,
+      2.0,
       0.0,
       0.0,
       0.0,
@@ -410,7 +405,9 @@
       0.0,
       0.0,
       0.0,
-      0.0
+      0.0,
+      0.0,
+      1.0
     ]
   }
 }
