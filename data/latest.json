@@ -1,53 +1,46 @@
 {
-  "updated_date": "2026-10-06",
+  "updated_date": "2026-10-14",
   "regime": "Red",
   "regime_text": "Backdrop can amplify downside",
   "correction_risk": "Low",
   "action_bias": "Trend allowed",
-  "total_score": 0.0,
+  "total_score": 1.0,
   "state": "Normal",
   "state_class": "green",
   "component_table": [
     {
       "name": "Dispersion",
-      "value": "0 | nq-spread=0.001",
-      "status": "Calm",
-      "class": "green"
+      "value": "1 | nq-spread=-0.007",
+      "status": "Hot",
+      "class": "amber"
     },
     {
       "name": "Extension",
-      "value": "0 | qqq=0.058%",
+      "value": "0 | qqq=-0.124%",
       "status": "Normal",
       "class": "green"
     },
     {
       "name": "Vol",
-      "value": "0 | VXN-VIX=-65.52",
+      "value": "0 | VXN-VIX=-68.92",
       "status": "Contained",
       "class": "green"
     },
     {
       "name": "Leadership",
-      "value": "0 | smh-lead=0.005",
+      "value": "0 | smh-lead=-0.001",
       "status": "Broad",
       "class": "green"
     },
     {
       "name": "Regime",
-      "value": "HYG/IEF=3.8562 | USDJPY=21.70",
+      "value": "HYG/IEF=3.9638 | USDJPY=21.14",
       "status": "Red",
       "class": "green"
     }
   ],
   "history": {
     "dates": [
-      "2026-04-13",
-      "2026-04-14",
-      "2026-04-15",
-      "2026-04-16",
-      "2026-04-17",
-      "2026-04-20",
-      "2026-04-21",
       "2026-04-22",
       "2026-04-23",
       "2026-04-24",
@@ -162,16 +155,15 @@
       "2026-09-30",
       "2026-10-01",
       "2026-10-02",
-      "2026-10-05"
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-09",
+      "2026-10-12",
+      "2026-10-13"
     ],
     "nq": [
-      77.91,
-      78.14,
-      78.11,
-      78.0,
-      78.29,
-      78.22,
-      78.02,
       78.14,
       78.02,
       78.12,
@@ -286,16 +278,15 @@
       76.87,
       76.9,
       76.91,
-      76.98
+      76.98,
+      77.27,
+      77.18,
+      77.14,
+      77.23,
+      77.29,
+      77.09
     ],
     "score": [
-      2.0,
-      2.0,
-      2.0,
-      2.0,
-      0.0,
-      0.0,
-      0.0,
       0.0,
       0.0,
       0.0,
@@ -410,7 +401,13 @@
       0.0,
       0.0,
       0.0,
-      0.0
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0
     ]
   }
 }
